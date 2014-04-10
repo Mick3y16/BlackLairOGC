@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+#	After being redirected to this folder, we perform a check to see if the request is either an existing
+#	directory or file.
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+#	If no directory or file is found, the request is redirected into index.php to be handled.
+	RewriteRule ^(.*)$ index.php [PT,L]
+</IfModule>

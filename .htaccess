@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+#	This file uses Apache's functionalities in order to restrict the access of a user to a minimum, in this
+#	case we are restricting access to the public folder and anything into it, but if you would wish to give
+#	access to another one, the following lines would allow you to do so.
+#	RewriteRule ^exampledir/$ exampledir/ [L]
+#	RewriteRule ^exampledir/(.*)$ exampledir/$1 [L]
+	RewriteRule ^$ public/ [L]
+	RewriteRule (.*) public/$1 [L]
+</IfModule>
