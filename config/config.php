@@ -45,5 +45,20 @@ session_name(COOKIE_NAME); // Sets the current session name
 session_set_cookie_params(COOKIE_EXPIRE, COOKIE_PATH, COOKIE_DOMAIN, COOKIE_SECUREONLY, COOKIE_HTTPONLY); // Sets the parameters of the Cookie
 session_start();
 
+// Validate Session
+if ($_SESSION['authenticated'] == true) {
+    //Check if the data saved matches the user's request...
+    if ($_SESSION['userip'] != $_SERVER['REMOTE_ADDR'] || $_SESSION['browser'] != $_SERVER['HTTP_USER_AGENT']) {
+        // See /application/controllers/UserController.php for info on the session destroy...
+        $_SESSION = array();
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time() - 2592000);
+        }
+        session_regenerate_id(true);
+        session_destroy();
+        header('Location:' . WEBSITE_DOMAIN);
+    }
+}
+
 // Magic in the making
 require_once(DIR_ROOT . '/library/bootstrap.php');
