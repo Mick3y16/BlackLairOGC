@@ -61,6 +61,15 @@ class User extends Model
         return $result;
     }
 
+    public function getuser($email)
+    {
+        $sth = $this->ogcdb->prepare("SELECT `username` FROM `ogc_users` WHERE `email`=:email");
+        $sth->bindParam(":email", $email);
+        $sth->execute();
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        return $result['username'];
+    }
+
     public function loginuser($email, $password)
     {
         $sth = $this->ogcdb->prepare("SELECT * FROM `ogc_users` WHERE `email`=:email AND `password`=:password");

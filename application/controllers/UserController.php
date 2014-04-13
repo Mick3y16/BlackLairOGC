@@ -70,12 +70,12 @@ class UserController extends Controller
                         setcookie(COOKIE_NAME, COOKIE_ID, COOKIE_MINEXPIRE, COOKIE_PATH, COOKIE_DOMAIN, COOKIE_SECUREONLY, COOKIE_HTTPONLY);
                     }
                     // Regenerate the id...
-                    //session_regenerate_id(TRUE);
+                    session_regenerate_id();
                     // Store the needed variables in the Cookie...
                     $_SESSION['authenticated'] = true;
+                    $_SESSION['username'] = $this->user->getuser($email);
                     $_SESSION['userip'] = $_SERVER['REMOTE_ADDR']; // User's IP Address
                     $_SESSION['browser'] = $_SERVER['HTTP_USER_AGENT']; // User's Browser
-                    /* $_SESSION['username'] = missing a function to return stuff from the database...*/ // User's Nickname
                     // Login worked, redirecting the user in 5 seconds...
                     $success = true;
                     $this->set('success', $success);
