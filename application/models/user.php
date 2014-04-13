@@ -81,4 +81,5 @@ class User extends Model
         $result = $sth->execute();
         return $result;
     }
+
 }
